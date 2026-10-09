@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主界面：纯原生主题，不引 appcompat -->
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#2F6BFF</item>
+        <item name="android:colorAccent">#2F6BFF</item>
+    </style>
+
+    <!--
+      受限引导页主题（v0.2）：亮色一套在 values，暗色一套在 values-night（同名覆盖）。
+      刻意不用 Theme.DeviceDefault.DayNight —— 它是 API 29 才有的，minSdk 26 上会崩。
+    -->
+    <style name="GuideTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#2F6BFF</item>
+        <item name="android:colorAccent">#2F6BFF</item>
+        <item name="android:windowBackground">@color/guide_bg</item>
+        <item name="android:statusBarColor">@color/guide_bg</item>
+        <item name="android:navigationBarColor">@color/guide_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- 透明主题：ProcessText / Share / 剪贴板兜底这几个"只干活不露脸"的入口用 -->
+    <style name="TransparentTheme" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>

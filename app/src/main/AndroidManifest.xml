@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 悬浮球：显示在其他应用上层 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- 两个前台服务：悬浮球(specialUse) + 截屏(mediaProjection) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+
+    <!-- Android 13+ 前台服务通知需要 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 引导用户把 App 加入电池白名单，避免国产 ROM 把悬浮球杀掉 -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="设置" />
+
+        <!--
+          「悬浮窗被系统限制」全屏引导页（v0.2）。
+          独立主题 GuideTheme：亮/暗两套（values-night），全屏无标题栏、大字。
+          入口：首页常驻「用不了？点这里」、「我打不开这个开关」、首次启动自动进。
+        -->
+        <activity
+            android:name=".LimitGuideActivity"
+            android:exported="false"
+            android:label="悬浮窗被系统限制怎么办"
+            android:theme="@style/GuideTheme" />
+
+        <!--
+          只为拿一次截屏授权 / 读一次剪贴板，界面透明。
+          ⚠️ taskAffinity="" 是必须的：这两个页是从悬浮球服务用 NEW_TASK 拉起来的，
+          如果挂在 App 自己的任务栈里，finish 之后系统会把 MainActivity 顶到前台，
+          把用户原本要翻译的那个界面盖掉（然后截到的就是 App 自己）。
+          独立任务栈 + noHistory + 不进最近任务，finish 后才会回到原来的 App。
+        -->
+        <activity
+            android:name=".CapturePermissionActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/TransparentTheme" />
+
+        <activity
+            android:name=".ClipboardActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/TransparentTheme" />
+
+        <!-- 系统文本选中菜单里的「翻译」（只对可选中文字有效） -->
+        <activity
+            android:name=".ProcessTextActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="屏幕翻译"
+            android:noHistory="true"
+            android:theme="@style/TransparentTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
+        <!-- 分享到本 App -->
+        <activity
+            android:name=".ShareTextActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="屏幕翻译"
+            android:noHistory="true"
+            android:theme="@style/TransparentTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".FloatingBallService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="floating_overlay_translation_ball" />
+        </service>
+
+        <service
+            android:name=".ScreenCaptureService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
+    </application>
+
+</manifest>

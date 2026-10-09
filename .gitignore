@@ -1,0 +1,28 @@
+# 屏幕翻译 Android · .gitignore
+# ---- ⚠️ 签名与本地配置：含密码，绝不提交 ----
+keystore.properties
+local.properties
+*.jks
+*.keystore
+*.p12
+
+# ---- 构建产物 ----
+build/
+dist/
+.gradle/
+*.apk
+*.aab
+*.ap_
+captures/
+
+# ---- IDE / 系统 ----
+.idea/
+*.iml
+.vs/
+Thumbs.db
+desktop.ini
+
+# 过程文档 —— 只留本地，不进仓库
+_接档文档.md
+引导页-交付说明.md
+任务单-*.md

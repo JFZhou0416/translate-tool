@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 暗色模式下的引导页底色 -->
+    <color name="guide_bg">#12141A</color>
+</resources>

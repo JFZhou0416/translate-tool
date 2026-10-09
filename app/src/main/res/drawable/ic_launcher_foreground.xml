@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 悬浮球（左上小圆） -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,34 m-11,0 a11,11 0 1,0 22,0 a11,11 0 1,0 -22,0" />
+
+    <!-- 译文卡片（右下圆角块） -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M46,50 L82,50 A6,6 0 0,1 88,56 L88,84 A6,6 0 0,1 82,90 L46,90 A6,6 0 0,1 40,84 L40,56 A6,6 0 0,1 46,50 Z" />
+
+    <!-- 卡片上的两行文字 -->
+    <path
+        android:fillColor="#2F6BFF"
+        android:pathData="M48,60 L80,60 L80,65 L48,65 Z" />
+    <path
+        android:fillColor="#2F6BFF"
+        android:pathData="M48,72 L68,72 L68,77 L48,77 Z" />
+</vector>

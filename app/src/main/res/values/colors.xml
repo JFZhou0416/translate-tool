@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#2F6BFF</color>
+    <!-- 受限引导页底色（暗色版在 values-night/colors.xml） -->
+    <color name="guide_bg">#FFFFFF</color>
+</resources>

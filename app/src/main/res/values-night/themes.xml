@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      受限引导页 · 暗色版（系统深色模式时生效）。
+      只有这一页跟着深色走：底色/状态栏 #12141A，正文浅灰（颜色在代码里按 Ui.isNight 取）。
+      主界面（AppTheme）刻意不动，还是原来的亮色，免得改了老用户眼熟的样子。
+    -->
+    <style name="GuideTheme" parent="android:Theme.Material.NoActionBar">
+        <item name="android:colorPrimary">#2F6BFF</item>
+        <item name="android:colorAccent">#2F6BFF</item>
+        <item name="android:windowBackground">@color/guide_bg</item>
+        <item name="android:statusBarColor">@color/guide_bg</item>
+        <item name="android:navigationBarColor">@color/guide_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
